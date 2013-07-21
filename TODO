@@ -1,0 +1,11 @@
+Things to do in future versions:
+
+- check the return value of the Subversion commands and show an
+error message if appropriate
+
+- implement a wrapper script for the diff command and invoke meld
+or similar (see http://subversion.tigris.org/faq.html#diff-cmd)
+
+- show the output of some other commands (like info) in a list
+box instead of a text box. See Status for an example.
+

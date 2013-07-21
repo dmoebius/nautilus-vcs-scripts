@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# Distributed under the terms of GNU GPL version 2
+#
+# http://marius.scurtescu.com/?p=102
+# http://gnomefiles.org/app.php?soft_id=1059
+
+unset WINDOWID
+
+LOGFILE=`mktemp -t svn_commit.XXXXXX`
+LOGMESSAGE=`zenity --entry --title="Subversion: Commit" --text="Enter log message:" --width=400 2>&1`
+
+if [ $? -eq 0 ] ; then
+    (echo "1" ; svn commit -m "$LOGMESSAGE" "$@" > $LOGFILE 2>&1 ; echo "100") | zenity --progress --title="Subversion: Commit" --text="Committing..." --pulsate --no-cancel --auto-close
+    zenity --text-info --title="Subversion: Commit" --filename=$LOGFILE --width=600 --height=400
+    rm -f $LOGFILE
+fi

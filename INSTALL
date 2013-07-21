@@ -1,0 +1,13 @@
+INSTALL
+=======
+
+Just copy the Subversion folder into ~/.local/share/nautilus/scripts.
+Or just invoke 'make' which does the same.
+
+In older versions of GNOME (before 3.0) the scripts had to be copied
+to either ~/.gnome2/nautilus-scripts, ~/.gnome/nautilus-scripts,
+~/Nautilus/scripts or ~/.nautilus/scripts, depending on the versions
+of GNOME and Nautilus you have.
+
+The scripts are using zenity for user interaction.
+

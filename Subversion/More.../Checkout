@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# Distributed under the terms of GNU GPL version 2
+#
+# http://marius.scurtescu.com/?p=102
+# http://gnomefiles.org/app.php?soft_id=1059
+
+LOGFILE=`mktemp -t svn_checkout.XXXXXX`
+
+URL=`zenity --entry --title="Subversion: Checkout" --text="Enter repository URL:" --entry-text="svn://" --width=400 2>&1`
+
+if [ $? -eq 0 ] ; then
+    (echo "1" ; svn checkout $URL > $LOGFILE 2>&1 ; echo "100") | zenity --progress --title="Subversion: Checkout" --text="Checking out..." --pulsate --no-cancel --auto-close
+    unset WINDOWID
+    zenity --text-info --title="Subversion: Checkout" --filename=$LOGFILE --width=600 --height=400
+    rm -f $LOGFILE
+fi

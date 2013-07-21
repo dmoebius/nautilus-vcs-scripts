@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Distributed under the terms of GNU GPL version 2
+#
+# http://marius.scurtescu.com/?p=102
+# http://gnomefiles.org/app.php?soft_id=1059
+
+LOGFILE=`mktemp -t svn_status.XXXXXX`
+
+unset WINDOWID
+
+(echo "1" ; svn status "$@" > $LOGFILE 2>&1 ; echo "100") | zenity --progress --title="Subversion: Status" --text="Retrieving status info..." --pulsate --no-cancel --auto-close
+cat $LOGFILE | sed 's/^\(.......\)/\1\n/' | zenity --list --title="Subversion: Status" --text="Status of: $@" --column="Status" --column="Filename" --width=600 --height=400
+#zenity --text-info --title="Subversion: Status" --filename=$LOGFILE --width=600 --height=400
+rm -f $LOGFILE

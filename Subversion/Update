@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Distributed under the terms of GNU GPL version 2
+#
+# http://marius.scurtescu.com/?p=102
+# http://gnomefiles.org/app.php?soft_id=1059
+
+LOGFILE=`mktemp -t svn_update.XXXXXX`
+
+unset WINDOWID
+
+(echo "1" ; svn update "$@" > $LOGFILE 2>&1 ; echo "100") | zenity --progress --title="Subversion: Update" --text="Updating..." --pulsate --no-cancel --auto-close
+zenity --text-info --title="Subversion: Update" --filename=$LOGFILE --width=600 --height=400
+rm -f $LOGFILE
+

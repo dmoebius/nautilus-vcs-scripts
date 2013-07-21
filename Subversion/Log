@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# Distributed under the terms of GNU GPL version 2
+#
+# http://marius.scurtescu.com/?p=102
+# http://gnomefiles.org/app.php?soft_id=1059
+
+LOGFILE=`mktemp -t svn_log.XXXXXX`
+
+unset WINDOWID
+
+(echo "1" ; svn log "$@" > $LOGFILE 2>&1 ; echo "100") | zenity --progress --title="Subversion: Log" --text="Reading log..." --pulsate --no-cancel --auto-close
+zenity --text-info --title="Subversion: Log" --filename=$LOGFILE --width=800 --height=400 --font=Monospace
+rm -f $LOGFILE
