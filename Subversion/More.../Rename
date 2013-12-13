@@ -16,7 +16,7 @@ fi
 NEWNAME=`zenity --entry --title="Subversion: Rename" --text="Enter a new name for '$1':" --entry-text="$1" --width=400 2>&1`
 
 if [ $? -eq 0 ] ; then
-    svn mv $1 $NEWNAME > $LOGFILE 2>&1
+    svn mv "$1" "$NEWNAME" > $LOGFILE 2>&1
     unset WINDOWID
     zenity --text-info --title="Subversion: Rename" --filename=$LOGFILE --width=600 --height=400
     rm -f $LOGFILE
